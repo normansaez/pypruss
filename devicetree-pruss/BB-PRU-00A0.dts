@@ -1,0 +1,83 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+    /* identification */
+    part-number = "BB-PRU";
+
+    /* version */
+    version = "00A0";
+
+    /* state the resources this cape uses or prepare to get winged! */
+    exclusive-use =
+        /* the pin header P8 uses */
+        "P8.16", /* DIR_EXT_2     */
+        "P8.15", /* DIR_EXT_1     */
+        "P8.14", /* DIR_Z         */
+        "P8.17", /* STEP_X         */
+        "P8.11", /* STEP_EXT_2    */
+        "P8.12", /* STEP_Y        */
+        "P8.13", /* STEP_Z        */
+        "P8.19", /* DIR_Y        */
+        "P8.26", /* DIR_X        */
+        /* Hardware IP cores in use */
+        "pruss"; 
+
+    fragment@0 {
+        target = <&am33xx_pinmux>;
+        __overlay__ {
+            pruicss_stepper_pins: pinmux_pruicss_stepper_pins{
+                pinctrl-single,pins = <
+                    0x038 0x07 // P8_16 = DIR_EXT_2        = GPIO1_14
+                    0x03C 0x07 // P8_15 = DIR_EXT_1        = GPIO1_15
+                    0x028 0x07 // P8_14 = DIR_Z            = GPIO0_26
+                    0x02C 0x07 // P8_17 = STEP_X          = GPIO0_27
+                     0x034 0x07 // P8_11 = step_ext_2     = GPIO1_13    
+                    0x030 0x07 // P8_12 = Step_y         = GPIO1_12
+                    0x024 0x07 // P8_13 = Step_z         = GPIO0_23
+                    0x020 0x07 // P8_19 = Dir_y          = GPIO0_22
+                    0x07C 0x07 // P8_26 = Dir_x            = GPIO1_29
+                    0x078 0x07 // P9_12 = step ext 1     = GPIO1_28
+                >;
+            };        
+
+        };
+    };
+
+    fragment@1{
+        target = <&pruss>;
+        __overlay__{
+            status = "okay";
+            pinctrl-names = "default";
+            pinctrl-0       = <&pruicss_stepper_pins>;
+
+            stepper_x{
+                pin-names     = "Replic:pru-step_x", "Replic:pru-dir_x";        
+                gpios         = <&gpio1 27 0
+                                &gpio2 29 0>; 
+            };            
+            stepper_y{
+                pin-names     = "Replic:pru-step_y", "Replic:pru-dir_y";        
+                gpios         =<&gpio2 12 0
+                               &gpio1 22 0>; 
+            };
+            stepper_z{
+                pin-names     = "Replic:pru-step_z", "Replic:pru-dir_z";        
+                gpios         = <&gpio1 23 0
+                                &gpio1 26 0>; 
+            };
+            stepper_ext_1{
+                pin-names     = "Replic:pru-step_ext_1", "Replic:pru-dir_ext_1";        
+                gpios         = <&gpio2 28 0
+                                &gpio2 15 0>; 
+            };
+            stepper_ext_2{
+                pin-names     = "Replic:pru-step_ext_2", "Replic:pru-dir_ext_2";        
+                gpios         = <&gpio2 13 0
+                                &gpio2 14 0>; 
+            };
+        };
+    };
+};

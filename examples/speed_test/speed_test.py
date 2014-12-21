@@ -3,6 +3,11 @@ import os
 
 print "This example toggles pin P8.12 as fast as it can, 5ns pr cycle."
 print "It muxes the pin to mode 6 and does not stop, so use Ctrl-c to end the script."
+#P8.12 = gpio_num = 44
+gpio_num = 44
+#"/sys/class/gpio/gpio%d/direction"
+#"/sys/class/gpio/gpio%d/value"
+#/sys/class/gpio/export
 
 os.system("echo 6 > /sys/kernel/debug/omap_mux/gpmc_ad12")
 
