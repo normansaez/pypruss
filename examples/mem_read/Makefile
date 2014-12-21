@@ -1,5 +1,5 @@
 
-COMPILER=pasm -b 
+COMPILER=../../PASM/pasm -b 
 FILENAME=mem_read
 
 .PHONY: clean all

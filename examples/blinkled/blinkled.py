@@ -3,7 +3,8 @@ It blinks the user leds ten times'''
 
 import pypruss
 
-pypruss.modprobe() 			  				       	# This only has to be called once pr boot
+#pypruss.modprobe() 			  				       	# This only has to be called once pr boot
+pypruss.modprobe(1000) 
 pypruss.init()										# Init the PRU
 pypruss.open(0)										# Open PRU event 0 which is PRU0_ARM_INTERRUPT
 pypruss.pruintc_init()								# Init the interrupt controller
