@@ -72,3 +72,5 @@ by
                         status = "okay";
 ```
 
+
+Notice that /dev/uio* will have root access !
