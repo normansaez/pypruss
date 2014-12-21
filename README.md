@@ -45,6 +45,7 @@ sudo mv /tmp/am335x-boneblack.dts_orig .
 sudo vim am335x-boneblack.dts_orig # see bellow what to edit
 sudo dtc -I dts -O dtb am335x-boneblack.dts_orig > /tmp/am335x-boneblack.dtb
 sudo mv /tmp/am335x-boneblack.dtb .
+sudo reboot
 ```
 
 In the decompressed file, look for something like this:
