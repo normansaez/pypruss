@@ -6,7 +6,7 @@ print "It muxes the pin to mode 6 and does not stop, so use Ctrl-c to end the sc
 
 os.system("echo 6 > /sys/kernel/debug/omap_mux/gpmc_ad12")
 
-pypruss.modprobe()
+pypruss.modprobe(1000)
 pypruss.init()										# Init the PRU
 pypruss.open(0)										# Open PRU event 0 which is PRU0_ARM_INTERRUPT
 pypruss.pruintc_init()								# Init the interrupt controller

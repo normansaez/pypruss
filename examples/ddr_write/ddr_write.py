@@ -6,7 +6,7 @@ import pypruss
 import mmap
 import struct 
 
-pypruss.modprobe()
+pypruss.modprobe(1000) 
 ddr_addr = pypruss.ddr_addr()
 ddr_size = pypruss.ddr_size()
 

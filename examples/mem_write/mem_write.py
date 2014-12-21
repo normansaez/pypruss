@@ -10,7 +10,7 @@ data = np.array([steps, delays])			# Make a 2D matrix combining the ticks and de
 data = data.transpose().flatten()			# Braid the data so every other item is a 
 data = [20]+list(data)					# Make the data into a list and add the number of ticks total
 
-pypruss.modprobe()							# This only has to be called once pr boot
+pypruss.modprobe(1000)							# This only has to be called once pr boot
 pypruss.init()								# Init the PRU
 pypruss.open(0)								# Open PRU event 0 which is PRU0_ARM_INTERRUPT
 pypruss.pruintc_init()						# Init the interrupt controller
